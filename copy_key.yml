@@ -1,7 +1,17 @@
 
 - hosts: web
-  task:
+  
+  tasks:
     - name : copy key
       copy:
         src: /home/davit/.ssh/id_rsa.pub
-        dest: /etc/foo.conf
+        dest: /tmp/key.pub
+
+    - name : get key
+      shell: cat /tmp/key.pub
+      register: pubkey
+
+    - name: put pubkey
+      lineinfile:
+          path: "/home/devops/.ssh/authorized_keys"
+          line: "{{ pubkey }}"
