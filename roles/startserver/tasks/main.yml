@@ -1,0 +1,16 @@
+
+- name: Set httpd permission for nginx
+  become: true
+  become_user: root
+  seboolean:
+    name: httpd_can_network_connect
+    state: yes
+    persistent: yes
+
+- name: Start nodejs app, by pm2 (nonidempotent)
+  become: true
+  become_user: "{{ user }}"
+  command: /usr/local/bin/pm2 start {{ appPath }}
+  register: stat
+
+

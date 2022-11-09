@@ -1,0 +1,19 @@
+- name: Copy nginx conf
+  become: true
+  become_user: root
+  copy:
+    src: /home/davit/learn/ansible/shua/files/nginx.conf
+    dest: /etc/nginx/conf.d/nodejs.conf
+    owner: nginx
+    group: nginx
+    mode: 0644
+
+- name: Start and enable nginx
+  become: true
+  become_user: root
+  service:
+    name: nginx
+    state: started
+    enabled: yes
+
+

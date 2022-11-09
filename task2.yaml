@@ -1,0 +1,18 @@
+
+- hosts: web
+  vars:
+    packages:
+      - git
+      # - pm2
+      - nodejs
+      - nginx
+    repo : https://github.com/alinebastos/simple-nodejs-server
+    user: david
+    appPath: /tmp/server/server.js
+  roles:
+    - role : createuser
+    - role : packages
+    - role : clonerepo
+    - role : startserver
+    - role : startnginx
+

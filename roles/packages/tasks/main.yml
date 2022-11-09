@@ -1,0 +1,14 @@
+- name: install packages
+  become: true
+  become_user: root
+  ansible.builtin.yum:
+    name: "{{packages}}"
+
+
+- name: Install pm2 service 
+  become: true
+  become_user: root
+  npm:
+    name: pm2
+    global: yes
+    state: latest

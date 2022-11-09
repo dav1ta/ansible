@@ -1,9 +1,0 @@
----
-- name: idempotent
-  hosts: web
-  tasks:
-
-    - name: Good example of module usage
-      copy:
-        content: nameserver 8.8.8.8
-        dest: /etc/resolv.conf
