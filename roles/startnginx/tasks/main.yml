@@ -2,7 +2,7 @@
   become: true
   become_user: root
   copy:
-    src: /home/davit/learn/ansible/shua/files/nginx.conf
+    src: files/nginx.conf
     dest: /etc/nginx/conf.d/nodejs.conf
     owner: nginx
     group: nginx
@@ -16,4 +16,12 @@
     state: started
     enabled: yes
 
+
+- name: check nginx
+  command: curl -k http://localhost
+  register: response
+
+- name: debug response
+  debug: 
+    msg: "{{response}}"
 

@@ -7,10 +7,20 @@
     state: yes
     persistent: yes
 
-- name: Start nodejs app, by pm2 (nonidempotent)
+- name: delete existing pm2 processes if running
+  command: "/usr/local/bin/pm2 delete server"
+  ignore_errors: True
   become: true
   become_user: "{{ user }}"
-  command: /usr/local/bin/pm2 start {{ appPath }}
-  register: stat
+
+- name: Start nodejs app 
+  become: true
+  become_user: "{{ user }}"
+  command: 
+    chdir: "/home/david"
+    cmd: "/usr/local/bin/pm2 start --name server {{ appPath }}"
+
+
+
 
 
